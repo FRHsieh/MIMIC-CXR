@@ -38,9 +38,9 @@ The objective is to combine computer vision and Natural Language Processing (NLP
 - **Final Report and Presentation**: A comprehensive report documenting methodology, results, and challenges, along with a presentation summarizing the project.
 
 ## Team Members
-- **Yuandi Tang**: Focus on fine-tuning and evaluation of models, reporting.
-- **Feng-Jen Hsieh**: Focus on image preprocessing and CNN model training.
 - **Alexander Koehler**: Handle text preprocessing and NLP model training for report generation.
+- **Feng-Jen Hsieh**: Focus on image preprocessing and CNN model training.
+- **Yuandi Tang**: Focus on fine-tuning and evaluation of models, reporting.
 
 ## Dataset
 - **MIMIC-CXR**: A large, publicly available collection of de-identified chest X-ray images and corresponding radiology reports from the Beth Israel Deaconess Medical Center ICU. The dataset contains over 370,000 images and detailed labels for common findings (e.g., pneumonia, pleural effusion, cardiomegaly).
