@@ -37,12 +37,6 @@ The objective is to combine computer vision and Natural Language Processing (NLP
 - **Text Summarization Model**: A model that generates readable diagnostic text summaries.
 - **Final Report and Presentation**: A comprehensive report documenting methodology, results, and challenges, along with a presentation summarizing the project.
 
-## Timeline
-- **Weeks 1-2**: Data cleaning, preprocessing, and class balancing.
-- **Weeks 3-4**: Train baseline CNN model, evaluate its performance (AUC, F1-score).
-- **Weeks 5-6**: Develop and evaluate the text summarization model; integrate CNN and NLP models.
-- **Final Weeks**: Refine and tune models; prepare final report and presentation.
-
 ## Team Members
 - **Yuandi Tang**: Focus on fine-tuning and evaluation of models, reporting.
 - **Feng-Jen Hsieh**: Focus on image preprocessing and CNN model training.
@@ -50,18 +44,3 @@ The objective is to combine computer vision and Natural Language Processing (NLP
 
 ## Dataset
 - **MIMIC-CXR**: A large, publicly available collection of de-identified chest X-ray images and corresponding radiology reports from the Beth Israel Deaconess Medical Center ICU. The dataset contains over 370,000 images and detailed labels for common findings (e.g., pneumonia, pleural effusion, cardiomegaly).
-
-## Setup and Installation
-
-### Prerequisites
-- Python 3.x
-- TensorFlow/Keras
-- HuggingFace Transformers (for NLP models)
-- PyTorch (for CNN models)
-- OpenCV or Pillow (for image processing)
-
-### Installation Instructions
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/your-username/mimic-cxr-project.git
-   cd mimic-cxr-project
