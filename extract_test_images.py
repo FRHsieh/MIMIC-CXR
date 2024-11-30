@@ -19,20 +19,23 @@ merge_df['jpg_id'] = merge_df['dicom_id'] + '.jpg'
 
 #we select posterior to anterior view
 df_pneu_pa = merge_df[(merge_df['ViewPosition'] =='PA') & (merge_df['Pneumonia'].isin([0,1]))]
+df_pneu_pa = df_pneu_pa[df_pneu_pa['jpg_id'].isin(test_images)]
 df_PE_pa = merge_df[(merge_df['ViewPosition'] =='PA') & (merge_df['Pleural Effusion'].isin([0,1]))]
+df_PE_pa = df_PE_pa[df_PE_pa['jpg_id'].isin(test_images)]
 df_Pneumothorax_pa = merge_df[(merge_df['ViewPosition'] =='PA') & (merge_df['Pneumothorax'].isin([0,1]))]
+df_Pneumothorax_pa = df_Pneumothorax_pa[df_Pneumothorax_pa['jpg_id'].isin(test_images)]
 
 test_images = os.listdir('Image_Testing_2') #all test images downloaded
 
-for file in df_pneu_pa[df_pneu_pa['jpg_id'].isin(test_images)]['jpg_id']:
+for file in df_pneu_pa['jpg_id']:
     file = 'Image_Testing_2/' + file
     shutil.copy(file, 'Testing/Pneumonia')
 
-for file in df_PE_pa[df_PE_pa['jpg_id'].isin(test_images)]['jpg_id']:
+for file in df_PE_pa['jpg_id']:
     file = 'Image_Testing_2/' + file
     shutil.copy(file, 'Testing/Pleural Effusion')
 
-for file in df_Pneumothorax_pa[df_Pneumothorax_pa['jpg_id'].isin(test_images)]['jpg_id']:
+for file in df_Pneumothorax_pa['jpg_id']:
     file = 'Image_Testing_2/' + file
     shutil.copy(file, 'Testing/Pneumothorax')
 
