@@ -17,26 +17,18 @@ merge_df = df2.merge(df4,on=['subject_id','study_id'],how='inner')
 merge_df = merge_df.merge(df6[['dicom_id', 'ViewPosition']],on='dicom_id',how='inner')
 merge_df['jpg_id'] = merge_df['dicom_id'] + '.jpg'
 
+test_images = os.listdir('Image_Testing') #all test images downloaded
+
 #we select posterior to anterior view
-df_pneu_pa = merge_df[(merge_df['ViewPosition'] =='PA') & (merge_df['Pneumonia'].isin([0,1]))]
-df_pneu_pa = df_pneu_pa[df_pneu_pa['jpg_id'].isin(test_images)]
-df_PE_pa = merge_df[(merge_df['ViewPosition'] =='PA') & (merge_df['Pleural Effusion'].isin([0,1]))]
-df_PE_pa = df_PE_pa[df_PE_pa['jpg_id'].isin(test_images)]
-df_Pneumothorax_pa = merge_df[(merge_df['ViewPosition'] =='PA') & (merge_df['Pneumothorax'].isin([0,1]))]
-df_Pneumothorax_pa = df_Pneumothorax_pa[df_Pneumothorax_pa['jpg_id'].isin(test_images)]
-
-test_images = os.listdir('Image_Testing_2') #all test images downloaded
-
-for file in df_pneu_pa['jpg_id']:
-    file = 'Image_Testing_2/' + file
-    shutil.copy(file, 'Testing/Pneumonia')
-
-for file in df_PE_pa['jpg_id']:
-    file = 'Image_Testing_2/' + file
-    shutil.copy(file, 'Testing/Pleural Effusion')
-
-for file in df_Pneumothorax_pa['jpg_id']:
-    file = 'Image_Testing_2/' + file
-    shutil.copy(file, 'Testing/Pneumothorax')
+for disease in ['Pleural Dffusion', 'Pneumonia', 'Pneumothorax', 'Atelectasis', 'Cardiomegaly', 'Consolidation', 'Edema', 'Enlarged Cardiomediastinum', #
+       'Fracture', 'Lung Lesion', 'Lung Opacity', 'No Finding',  'Pleural Other',   'Support Devices']:
+    df = merge_df[(merge_df['ViewPosition'] =='PA') & (merge_df[disease].isin([0,1]))]
+    df = df[df['jpg_id'].isin(test_images)]
+    
+    if not os.path.exists(f'Testing/{disease}'):
+        os.makedirs(f'Testing/{disease}') 
+    for file in df['jpg_id']:
+        file = 'Image_Testing/' + file
+        shutil.copy(file, f'Testing/{disease}')
 
 #some images are mislabeled as "PA" and we manually removed them
