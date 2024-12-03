@@ -111,7 +111,7 @@ pip install -r requirements.txt
 ## Usage
 
 Once the setup is complete, you can run the experiments with the following commands:
-1.	**Train a model:**
+1. **Train a model:**
 
 python train.py --model resnet50 --epochs 50 --batch_size 32
 
@@ -124,7 +124,7 @@ python evaluate.py --model resnet50 --test_data test_data.csv
 python generate_reports.py --model llama --input_images test_images/
 
 ## Results
-![image](Model Metrices.png)
+![image](CNN.png)
 
 Our experimental results indicate that the **ResNet50** model achieved the highest accuracy (92.3%) and F1-score (0.89) for pneumonia detection. **VGG16** showed competitive performance (88.7%) but with longer training times. The **LLaMA-3.2-11B-Vision-Instruct** model demonstrated excellent text generation performance with 95% concordance with human-generated reports.
 
