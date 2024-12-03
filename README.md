@@ -89,7 +89,7 @@ The models were evaluated using the following metrics:
 - **F1-Score**: The harmonic mean of precision and recall, used to evaluate the balance between precision and recall.
 - **AUC (Area Under Curve)**: Used to evaluate the performance of binary classification tasks.
 
-## Installation
+### Installation
 
 To run the code and replicate the results, follow these steps:
 
@@ -98,6 +98,7 @@ To run the code and replicate the results, follow these steps:
 ```bash
 git clone https://github.com/yuanditang/MIMIC-CXR.git
 cd MIMIC-CXR
+```
 
 2. **Install the dependencies:**
 
