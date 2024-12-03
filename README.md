@@ -5,6 +5,10 @@
 
 This repository contains the implementation and results of the research paper **"MIMIC-CXR: Chest X-ray Image Classification and Report Generation"**. The project leverages the MIMIC-CXR dataset, which includes chest X-ray images along with corresponding radiology reports. The goal is to develop an automated system capable of both **classifying chest abnormalities** and **generating radiologist-style reports**. We utilize advanced convolutional neural networks (CNNs) for image classification, alongside cutting-edge multimodal models, such as **LLaMA-3.2-11B-Vision-Instruct**, for text generation.
 
+[See our paper](https://www.overleaf.com/read/ndtcsshrwzzd#1ced8a)
+[See our demo](https://www.canva.com/design/DAGXdXy0xKU/BVLZYe-p23RkPfG2Qx_YaQ/view?utm_content=DAGXdXy0xKU&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+
+
 ## Objectives
 
 The main objectives of this project are:
