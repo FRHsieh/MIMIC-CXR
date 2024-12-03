@@ -1,46 +1,100 @@
-# MIMIC-CXR Data Analysis: Chest X-ray Image Classification and Report Generation
+# MIMIC-CXR: Chest X-ray Image Classification and Report Generation
 
 ## Overview
-This project aims to automatically classify abnormalities in chest X-ray images and generate text summaries that mirror radiologist reports using the MIMIC-CXR dataset. The goal is to enhance the speed and accuracy of interpreting chest X-rays by identifying common pathologies (e.g., pneumonia, pulmonary edema, pleural effusion) and summarizing them in a readable format.
 
-## Project Goal
-The objective is to combine computer vision and Natural Language Processing (NLP) to automatically generate diagnostic reports from chest X-rays. Specifically, we are focused on:
-- Classifying pathologies in X-ray images.
-- Generating accurate text summaries of the findings.
+This repository contains the implementation and results of the research paper **"MIMIC-CXR: Chest X-ray Image Classification and Report Generation"**. The project leverages the MIMIC-CXR dataset, which includes chest X-ray images along with corresponding radiology reports. The goal is to develop an automated system capable of both **classifying chest abnormalities** and **generating radiologist-style reports**. We utilize advanced convolutional neural networks (CNNs) for image classification, alongside cutting-edge multimodal models, such as **LLaMA-3.2-11B-Vision-Instruct**, for text generation.
 
-## Key Challenges
-- **Image Classification**: Classifying multiple pathologies in chest X-ray images.
-- **Natural Language Processing (NLP)**: Generating readable and clinically relevant text summaries from the classified images.
-- **Dataset Complexity**: Handling a large and complex dataset with detailed annotations for numerous conditions.
+## Objectives
 
-## Technologies Used
-- **Computer Vision**: Convolutional Neural Networks (CNN) such as ResNet or EfficientNet for image classification.
-- **NLP Models**: XXX or XXX models for text summarization.
-- **Multimodal Learning**: Techniques like CLIP for image-text alignment.
-- **Evaluation Metrics**: 
-  - For classification: AUC, precision, recall, F1-score.
-  - For text generation: XXX,XXX.
+The main objectives of this project are:
 
-## Project Approach
-1. **Data Preprocessing**:
-   - Clean the dataset, normalize images, resize them, and handle class imbalances.
-2. **Model Training**:
-   - Fine-tune a pre-trained CNN model (ResNet or EfficientNet) for pathologies classification.
-   - Train NLP models (BERT or T5) for summarizing radiologist-like reports based on images and their associated labels.
-3. **Multimodal Learning**:
-   - Investigate the use of CLIP to improve the alignment between the image features and the text descriptions.
-4. **Evaluation**:
-   - Evaluate the performance of the models using appropriate metrics for classification and text generation.
+1. **Classify Chest X-ray Abnormalities**: Train CNN models to detect common chest conditions, such as pneumonia, pleural effusion, and pneumothorax.
+2. **Generate Diagnostic Reports**: Use advanced language models to generate concise and accurate diagnostic reports based on the chest X-ray images.
+3. **Multimodal Image-Text Alignment**: Employ multimodal models like **Vision 11B** and **LLaMA-3.2-11B-Vision-Instruct** to improve the alignment between visual features and textual descriptions.
+4. **Enhance Healthcare Efficiency**: Improve diagnostic workflows and automate the process of chest X-ray interpretation.
 
-## Deliverables
-- **Image Classification Model**: A CNN that classifies pathologies in chest X-rays.
-- **Text Summarization Model**: A model that generates readable diagnostic text summaries.
-- **Final Report and Presentation**: A comprehensive report documenting methodology, results, and challenges, along with a presentation summarizing the project.
+## Key Contributions
 
-## Team Members
-- **Alexander Koehler**: Handle text preprocessing and NLP model training for report generation.
-- **Feng-Jen Hsieh**: Focus on image preprocessing and CNN model training.
-- **Yuandi Tang**: Focus on fine-tuning and evaluation of models, reporting.
+- **CNN Architectures**: The paper employs popular CNN architectures such as **ResNet18**, **ResNet50**, and **VGG16** for image classification tasks. These models were fine-tuned on the MIMIC-CXR dataset to detect chest abnormalities.
+  
+- **Text Generation**: We use **LLaMA-3.2-11B-Vision-Instruct** for generating concise, clinically relevant radiology reports from the images, mimicking the workflow of expert radiologists.
+
+- **Multimodal Alignment**: Integration of **Vision 11B** and **Onslaught** for vision-language alignment helps bridge image and textual data for accurate report generation.
+
+- **Optimized Performance**: Hyperparameter tuning and model selection were conducted to achieve the optimal balance between accuracy, F1-score, and computational efficiency.
+
+## Table of Contents
+
+1. [Introduction](#introduction)
+2. [Dataset](#dataset)
+3. [Methodology](#methodology)
+   - [Preprocessing](#preprocessing)
+   - [Model Architecture](#model-architecture)
+   - [Evaluation Metrics](#evaluation-metrics)
+4. [Installation](#installation)
+5. [Usage](#usage)
+6. [Results](#results)
+7. [Conclusion](#conclusion)
+8. [License](#license)
+9. [Acknowledgments](#acknowledgments)
+
+## Introduction
+
+Chest X-rays are essential for diagnosing many chest conditions. However, manual interpretation of chest X-rays is time-consuming and requires significant expertise. The **MIMIC-CXR dataset**, comprising over 370,000 chest X-ray images paired with radiology reports, offers an opportunity to develop automated tools that assist radiologists by streamlining the image interpretation process.
+
+This project explores how we can utilize state-of-the-art models for both image classification and text generation to automate chest X-ray interpretation. By combining image processing and natural language processing, we aim to enhance diagnostic workflows and reduce the workload of healthcare professionals.
 
 ## Dataset
-- **MIMIC-CXR**: A large, publicly available collection of de-identified chest X-ray images and corresponding radiology reports from the Beth Israel Deaconess Medical Center ICU. The dataset contains over 370,000 images and detailed labels for common findings (e.g., pneumonia, pleural effusion, cardiomegaly).
+
+The MIMIC-CXR dataset is publicly available and contains over 370,000 chest X-ray images along with full-text radiology reports. The dataset includes:
+
+- **Chest X-ray images** in DICOM format.
+- **Radiology reports** associated with each image.
+- **Disease labels**: Binary disease annotations (e.g., pneumonia: 0 or 1).
+- **View positions**: PA (posterior-anterior), AP (anterior-posterior), LATERAL.
+
+We used a curated subset of 85,872 unique study IDs with images from various angles and associated disease annotations. This data was preprocessed and cleaned to fit the model training process.
+
+## Methodology
+
+### Preprocessing
+
+The preprocessing pipeline involved:
+
+1. **Merging Metadata**: Data was merged from multiple CSV files containing patient records, CheXpert labels, and view positions.
+2. **Text Extraction**: Full-text reports were extracted from ZIP archives and preprocessed for text generation tasks.
+3. **Image Preprocessing**: Images were resized to 224x224 pixels and normalized for input into CNN models. Data augmentation techniques, including random rotations and flips, were applied to improve model generalization.
+
+### Model Architecture
+
+#### CNN Models for Image Classification
+The following CNN models were trained and evaluated for image classification:
+
+- **ResNet18**: A lightweight, deep residual network known for efficient performance.
+- **ResNet50**: A deeper residual network that showed superior accuracy.
+- **VGG16**: A classic CNN architecture used as a baseline for comparison.
+
+#### Text Generation
+- **LLaMA-3.2-11B-Vision-Instruct**: This advanced language model was fine-tuned to generate diagnostic summaries from chest X-ray images.
+
+#### Vision-Language Alignment
+- **Vision 11B**: Used for aligning image features with textual descriptions to improve multimodal understanding.
+- **Onslaught**: A Vision Transformer model optimized for medical image feature extraction.
+
+### Evaluation Metrics
+
+The models were evaluated using the following metrics:
+
+- **Accuracy**: The percentage of correct predictions made by the model.
+- **F1-Score**: The harmonic mean of precision and recall, used to evaluate the balance between precision and recall.
+- **AUC (Area Under Curve)**: Used to evaluate the performance of binary classification tasks.
+
+## Installation
+
+To run the code and replicate the results, follow these steps:
+
+1. **Clone this repository:**
+
+```bash
+git clone https://github.com/yuanditang/MIMIC-CXR.git
+cd MIMIC-CXR
