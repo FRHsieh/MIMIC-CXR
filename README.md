@@ -41,6 +41,15 @@ The main objectives of this project are:
 6. [Conclusion](#conclusion)
 7. [References](#references)
 
+## File Directory
+
+1. [Prepocessing Methods](Prepocessing.ipynb)
+2. [CNN Model Tuning](CNN_tuning.ipynb)
+3. [CNN Model Training Testing and Validation](CNN_train_test.ipynb)
+4. [Model Evaluation](CNN.png)
+5. [Final Report](Project_Report.pdf)
+
+
 ## Introduction
 
 Chest X-rays are pivotal for diagnosing various thoracic conditions. Yet, their interpretation is prone to error, especially for subtle or rare abnormalities. The **MIMIC-CXR dataset** offers a substantial resource for developing AI systems to assist radiologists by reducing their workload and improving diagnostic accuracy.
