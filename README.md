@@ -9,14 +9,13 @@ This repository contains the implementation and results of the research paper **
 
 **See our demo [here](https://www.canva.com/design/DAGXdXy0xKU/BVLZYe-p23RkPfG2Qx_YaQ/view?utm_content=DAGXdXy0xKU&utm_campaign=designshare&utm_medium=link&utm_source=editor)**
 
-
 ## Objectives
 
 The main objectives of this project are:
 
 1. **Classify Chest X-ray Abnormalities**: Train CNN models to detect common chest conditions, such as pneumonia, pleural effusion, and pneumothorax.
 2. **Generate Diagnostic Reports**: Use advanced language models to generate concise and accurate diagnostic reports based on the chest X-ray images.
-3. **Multimodal Image-Text Alignment**: Employ multimodal models like **Vision 11B** and **LLaMA-3.2-11B-Vision-Instruct** to improve the alignment between visual features and textual descriptions.
+3. **Multimodal Image-Text Alignment**: Employ multimodal models like **LLaMA-3.2-11B-Vision-Instruct** to improve the alignment between visual features and textual descriptions.
 4. **Enhance Healthcare Efficiency**: Improve diagnostic workflows and automate the process of chest X-ray interpretation.
 
 ## Key Contributions
@@ -25,7 +24,7 @@ The main objectives of this project are:
   
 - **Text Generation**: We use **LLaMA-3.2-11B-Vision-Instruct** for generating concise, clinically relevant radiology reports from the images, mimicking the workflow of expert radiologists.
 
-- **Multimodal Alignment**: Integration of **Vision 11B** and **Onslaught** for vision-language alignment helps bridge image and textual data for accurate report generation.
+- **Multimodal Alignment**: Integration of **LLaMA-3.2-11B-Vision-Instruct** for vision-language alignment helps bridge image and textual data for accurate report generation.
 
 - **Optimized Performance**: Hyperparameter tuning and model selection were conducted to achieve the optimal balance between accuracy, F1-score, and computational efficiency.
 
@@ -36,30 +35,26 @@ The main objectives of this project are:
 3. [Methodology](#methodology)
    - [Preprocessing](#preprocessing)
    - [Model Architecture](#model-architecture)
-   - [Evaluation Metrics](#evaluation-metrics)
-4. [Installation](#installation)
-5. [Usage](#usage)
-6. [Results](#results)
-7. [Conclusion](#conclusion)
-8. [License](#license)
-9. [Acknowledgments](#acknowledgments)
+   - [Training and Evaluation](#training-and-evaluation)
+4. [Results](#results)
+5. [Discussion](#discussion)
+6. [Conclusion](#conclusion)
+7. [References](#references)
 
 ## Introduction
 
-Chest X-rays are essential for diagnosing many chest conditions. However, manual interpretation of chest X-rays is time-consuming and requires significant expertise. The **MIMIC-CXR dataset**, comprising over 370,000 chest X-ray images paired with radiology reports, offers an opportunity to develop automated tools that assist radiologists by streamlining the image interpretation process.
+Chest X-rays are pivotal for diagnosing various thoracic conditions. Yet, their interpretation is prone to error, especially for subtle or rare abnormalities. The **MIMIC-CXR dataset** offers a substantial resource for developing AI systems to assist radiologists by reducing their workload and improving diagnostic accuracy.
 
-This project explores how we can utilize state-of-the-art models for both image classification and text generation to automate chest X-ray interpretation. By combining image processing and natural language processing, we aim to enhance diagnostic workflows and reduce the workload of healthcare professionals.
+This project employs CNNs and the advanced multimodal model **LLaMA-3.2-11B-Vision-Instruct** to process chest X-ray images and generate diagnostic reports. By combining image classification with NLP-driven insights, our system aims to enhance clinical workflows and offer a scalable solution for medical imaging challenges.
 
 ## Dataset
 
-The MIMIC-CXR dataset is publicly available and contains over 370,000 chest X-ray images along with full-text radiology reports. The dataset includes:
+We utilized the MIMIC-CXR dataset, focusing on a curated subset of chest X-ray images. The dataset includes:
 
-- **Chest X-ray images** in DICOM format.
-- **Radiology reports** associated with each image.
-- **Disease labels**: Binary disease annotations (e.g., pneumonia: 0 or 1).
-- **View positions**: PA (posterior-anterior), AP (anterior-posterior), LATERAL.
-
-We used a curated subset of 85,872 unique study IDs with images from various angles and associated disease annotations. This data was preprocessed and cleaned to fit the model training process.
+- Chest X-ray images in DICOM format
+- Radiology reports associated with each image
+- Disease labels: Binary disease annotations
+- View positions: PA (posterior-anterior), AP (anterior-posterior), LATERAL
 
 ## Methodology
 
@@ -67,94 +62,66 @@ We used a curated subset of 85,872 unique study IDs with images from various ang
 
 The preprocessing pipeline involved:
 
-1. **Merging Metadata**: Data was merged from multiple CSV files containing patient records, CheXpert labels, and view positions.
-2. **Text Extraction**: Full-text reports were extracted from ZIP archives and preprocessed for text generation tasks.
-3. **Image Preprocessing**: Images were resized to 224x224 pixels and normalized for input into CNN models. Data augmentation techniques, including random rotations and flips, were applied to improve model generalization.
+1. Merging metadata from multiple CSV files, including patient records, CheXpert labels, and metadata.
+2. Aligning images based on subject_id, study_id, and dicom_id.
+3. Filtering the dataset to include only posterior-anterior (PA) chest X-rays with labels as 1 (case) or 0 (control).
+4. Selecting a single PA image per subject to maintain balance.
+5. Resizing images to 224×224 pixels and normalizing using a mean and standard deviation of 0.5.
 
 ### Model Architecture
 
-#### CNN Models for Image Classification
-The following CNN models were trained and evaluated for image classification:
+We evaluated several pretrained CNN models, including VGG-16, ResNet, and DenseNet. Among the tested models, ResNet-18 demonstrated the best performance and was chosen for further tuning. 
 
-- **ResNet18**: A lightweight, deep residual network known for efficient performance.
-- **ResNet50**: A deeper residual network that showed superior accuracy.
-- **VGG16**: A classic CNN architecture used as a baseline for comparison.
+For text generation and multimodal alignment, we employed **LLaMA-3.2-11B-Vision-Instruct**.
 
-#### Text Generation
-- **LLaMA-3.2-11B-Vision-Instruct**: This advanced language model was fine-tuned to generate diagnostic summaries from chest X-ray images.
+### Training and Evaluation
 
-#### Vision-Language Alignment
-- **Vision 11B**: Used for aligning image features with textual descriptions to improve multimodal understanding.
-- **Onslaught**: A Vision Transformer model optimized for medical image feature extraction.
+The dataset was split into training and validation sets. We implemented early stopping during training to mitigate overfitting. Data augmentation techniques, including random horizontal flips and rotations, were applied during training.
 
-### Evaluation Metrics
-
-The models were evaluated using the following metrics:
-
-- **Accuracy**: The percentage of correct predictions made by the model.
-- **F1-Score**: The harmonic mean of precision and recall, used to evaluate the balance between precision and recall.
-- **AUC (Area Under Curve)**: Used to evaluate the performance of binary classification tasks.
-
-### Installation
-
-To run the code and replicate the results, follow these steps:
-
-1. **Clone this repository:**
-
-```bash
-git clone https://github.com/yuanditang/MIMIC-CXR.git
-cd MIMIC-CXR
-```
-
-2. **Install the dependencies:**
-
-pip install -r requirements.txt
-
-3. **Download the MIMIC-CXR dataset by following the instructions on the official website.**
-4. **Download pre-trained models or fine-tune them using the dataset.**
-
-## Usage
-
-Once the setup is complete, you can run the experiments with the following commands:
-1. **Train a model:**
-
-python train.py --model resnet50 --epochs 50 --batch_size 32
-
-2. **Evaluate a model:**
-
-python evaluate.py --model resnet50 --test_data test_data.csv
-
-3. **Generate reports:**
-
-python generate_reports.py --model llama --input_images test_images/
+Model performance was assessed using metrics such as F1-score, ROC-AUC, and accuracy, calculated on the validation set.
 
 ## Results
-![image](CNN.png)
 
-Our experimental results indicate that the **ResNet50** model achieved the highest accuracy (92.3%) and F1-score (0.89) for pneumonia detection. **VGG16** showed competitive performance (88.7%) but with longer training times. The **LLaMA-3.2-11B-Vision-Instruct** model demonstrated excellent text generation performance with 95% concordance with human-generated reports.
+Our model demonstrated varying performance across different chest abnormalities:
 
-### Performance Summary:
+| Disease          | Accuracy | F1 Score | AUC    |
+|------------------|----------|----------|--------|
+| Pneumonia        | 0.6792   | 0.5405   | 0.6914 |
+| Pleural Effusion | 0.7385   | 0.7733   | 0.8618 |
+| Pneumothorax     | 0.6800   | 0.3333   | 0.6667 |
+| Atelectasis      | 0.7647   | 0.8421   | 0.8279 |
+| Cardiomegaly     | 0.2727   | 0.1111   | 0.6000 |
+| Consolidation    | 0.7317   | 0.2667   | 0.7270 |
 
-**ResNet50:** Highest accuracy and F1 score.
+![image](A.png)
+The results show that our model performs well in detecting common abnormalities like pleural effusion and atelectasis, with high accuracy and F1 scores. However, performance on rarer conditions like cardiomegaly was less robust.
 
-**VGG16:** Competitive, but slower.
+## Discussion
 
-**ResNet18:** Best computational efficiency with slightly lower accuracy.
+### Strengths
+1. **LLaMA's Integration for Enhanced Reporting**: The use of LLaMA-3.2-11B-Vision-Instruct significantly enhanced the quality and coherence of diagnostic report generation.
+2. **ResNet50's Superior Performance**: Among the evaluated architectures, ResNet50 emerged as the most accurate model for complex pathologies.
 
-### Report Generation:
-
-**LLaMA-3.2** generated clinically relevant, concise reports with high accuracy in summarizing key findings.
+### Challenges
+1. **Difficulty in Handling Rare Abnormalities**: Cardiomegaly and similar underrepresented conditions pose a challenge due to dataset imbalance.
+2. **Dataset Bias and Generalization Issues**: Heavy reliance on the MIMIC-CXR dataset introduces biases specific to its demographic and clinical environment.
 
 ## Conclusion
 
-This project showcases an integrated approach for automating chest X-ray interpretation. By combining state-of-the-art image classification models with advanced natural language generation techniques, we significantly reduce the workload of radiologists and improve diagnostic accuracy. Future work will focus on expanding the dataset to include other imaging modalities, enhancing the model’s adaptability, and integrating it into clinical settings for real-time analysis.
+While our model shows promise in automating chest X-ray analysis, there is still significant room for improvement, particularly in handling rarer conditions and generating comprehensive reports. The combination of CNN-based classification and advanced language models like LLaMA-3.2-11B-Vision-Instruct represents a promising direction for future research in medical imaging AI.
 
-## License
+Future work should focus on:
+1. Improving the model's performance on rarer conditions
+2. Exploring more sophisticated data augmentation techniques
+3. Investigating the potential of ensemble methods to boost overall performance
+4. Further integration of LLaMA-3.2-11B-Vision-Instruct for comprehensive report generation
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+## References
 
-## Acknowledgments
-
-We would like to thank the MIMIC-CXR team for providing the dataset and the research community for their contributions. Special thanks to Professor Hongyang Ryan Zhang for guiding this project.
-
-This README in markdown format details the project structure, methodology, dataset, evaluation metrics, results, and installation instructions. It also references the necessary code and external resources for using and reproducing the project.
+1. Rajpurkar, P., et al. (2017). CheXNet: Radiologist-level pneumonia detection on chest X-rays with deep learning.
+2. Li, C., et al. (2023). Llava-Med: Training a large language-and-vision assistant for Biomedicine in one day.
+3. Moon, J. H., et al. (2022). Multi-modal understanding and generation for medical images and text via vision-language pre-training.
+4. Park, K., et al. (2022). Covid-19 CXR classification: Applying domain extension transfer learning and deep learning.
+5. Johnson, A., et al. (2024). MIMIC-CXR Database v2.1.0.
+6. Johnson, A. E. W., et al. (2019). MIMIC-CXR, a de-identified publicly available database of chest radiographs with free-text reports.
+7. Goldberger, A. L., et al. (2000). PhysioBank, PhysioToolkit, and PhysioNet: Components of a new research resource for complex physiologic signals.
