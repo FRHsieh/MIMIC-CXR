@@ -130,13 +130,15 @@ Our experimental results indicate that the **ResNet50** model achieved the highe
 
 ### Performance Summary:
 
-	•	**ResNet50:** Highest accuracy and F1 score.
-	•	**VGG16:** Competitive, but slower.
-	•	**ResNet18:** Best computational efficiency with slightly lower accuracy.
+**ResNet50:** Highest accuracy and F1 score.
+
+**VGG16:** Competitive, but slower.
+
+**ResNet18:** Best computational efficiency with slightly lower accuracy.
 
 ### Report Generation:
 
-	•	**LLaMA-3.2** generated clinically relevant, concise reports with high accuracy in summarizing key findings.
+**LLaMA-3.2** generated clinically relevant, concise reports with high accuracy in summarizing key findings.
 
 ## Conclusion
 
