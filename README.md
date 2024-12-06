@@ -9,24 +9,50 @@ This repository contains the implementation and results of the research paper **
 
 **See our demo [here](https://www.canva.com/design/DAGXdXy0xKU/BVLZYe-p23RkPfG2Qx_YaQ/view?utm_content=DAGXdXy0xKU&utm_campaign=designshare&utm_medium=link&utm_source=editor)**
 
-## Objectives
+## Main Objectives
 
-The main objectives of this project are:
+1. **Classify Chest X-ray Abnormalities**: Train CNN models to detect common chest conditions such as pneumonia, pleural effusion, and pneumothorax.
 
-1. **Classify Chest X-ray Abnormalities**: Train CNN models to detect common chest conditions, such as pneumonia, pleural effusion, and pneumothorax.
-2. **Generate Diagnostic Reports**: Use advanced language models to generate concise and accurate diagnostic reports based on the chest X-ray images.
-3. **Multimodal Image-Text Alignment**: Employ multimodal models like **LLaMA-3.2-11B-Vision-Instruct** to improve the alignment between visual features and textual descriptions.
+2. **Generate Diagnostic Reports**: Utilize advanced language models to create concise and accurate diagnostic reports based on chest X-ray images.
+
+3. **Multimodal Image-Text Alignment**: Employ multimodal models, specifically LLaMA-3.2-11B-Vision-Instruct, to improve the alignment between visual features and textual descriptions.
+
 4. **Enhance Healthcare Efficiency**: Improve diagnostic workflows and automate the process of chest X-ray interpretation.
 
-## Key Contributions
+## Approach
 
-- **CNN Architectures**: The paper employs popular CNN architectures such as **ResNet18**, **ResNet50**, and **VGG16** for image classification tasks. These models were fine-tuned on the MIMIC-CXR dataset to detect chest abnormalities.
-  
-- **Text Generation**: We use **LLaMA-3.2-11B-Vision-Instruct** for generating concise, clinically relevant radiology reports from the images, mimicking the workflow of expert radiologists.
+The project utilizes a combination of advanced CNN architectures and multimodal models to enhance chest X-ray analysis and reporting:
 
-- **Multimodal Alignment**: Integration of **LLaMA-3.2-11B-Vision-Instruct** for vision-language alignment helps bridge image and textual data for accurate report generation.
+### 1. CNN Architectures for Image Classification
 
-- **Optimized Performance**: Hyperparameter tuning and model selection were conducted to achieve the optimal balance between accuracy, F1-score, and computational efficiency.
+- Evaluated several pretrained CNN models, including VGG-16, ResNet, and DenseNet.
+- ResNet-18 demonstrated the best performance and was chosen for further tuning.
+- ResNet50 emerged as the most accurate model for complex pathologies.
+
+### 2. LLaMA-3.2-11B-Vision-Instruct for Text Generation and Multimodal Alignment
+
+- Used for generating concise, clinically relevant radiology reports from the images.
+- Integrates vision and language to interpret medical images and generate coherent diagnostic reports.
+- Fine-tuned to align text and visual features effectively.
+
+### 3. Preprocessing and Data Augmentation
+
+- Preprocessing pipeline includes merging metadata, aligning images, filtering for PA chest X-rays, and resizing images.
+- Data augmentation techniques such as random horizontal flips and rotations are applied during training.
+
+### 4. Training and Evaluation
+
+- Dataset split into training and validation sets.
+- Early stopping implemented to mitigate overfitting.
+- Performance assessed using metrics like F1-score, ROC-AUC, and accuracy.
+
+### 5. Multimodal Integration
+
+- LLaMA's vision encoder processes X-ray images, while the text generator creates coherent diagnostic narratives.
+- This integration aims to bridge the gap between image and textual data for accurate report generation.
+
+By combining these advanced CNN architectures with the multimodal capabilities of LLaMA-3.2-11B-Vision-Instruct, the project aims to create a comprehensive system that can both accurately classify chest abnormalities and generate detailed, radiologist-style reports. This approach has the potential to significantly enhance the efficiency and accuracy of chest X-ray interpretation in clinical settings.
+
 
 ## Table of Contents
 
