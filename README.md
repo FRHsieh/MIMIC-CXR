@@ -44,10 +44,11 @@ The main objectives of this project are:
 ## File Directory
 
 1. [Prepocessing Methods](Prepocessing.ipynb)
-2. [CNN Model Tuning](CNN_tuning.ipynb)
-3. [CNN Model Training Testing and Validation](CNN_train_test.ipynb)
-4. [Model Evaluation](CNN.png)
-5. [Final Report](Project_Report.pdf)
+2. [CNN Model Tuning](/CNN/CNN_tuning.ipynb)
+3. [CNN Model Training Testing and Validation](/CNN/CNN_train_test.ipynb)
+4. [Model Evaluation](/CNN/CNN.png)
+5. 
+6. [Final Report](Project_Report.pdf)
 
 
 ## Introduction
