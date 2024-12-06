@@ -73,9 +73,9 @@ By combining these advanced CNN architectures with the multimodal capabilities o
 2. [CNN Model Tuning](/CNN/CNN_tuning.ipynb)
 3. [CNN Model Training Testing and Validation](/CNN/CNN_train_test.ipynb)
 4. [CNN Model Evaluation](/CNN/CNN.png)
-5. [LLama Setting Up](/Text_Generation/Llama_Setting_Up.ipynb)
-6. [LLama Training](/Text_Generation/Loading_and_Training.ipynb)
-7. [LLama Results Analysis](/Text_Generation/Results_analysis.ipynb)
+5. [LLama Setting Up](/Text Generation/Llama_Setting_Up.ipynb)
+6. [LLama Training](/Text Generation/Loading_and_Training.ipynb)
+7. [LLama Results Analysis](/Text Generation/Results_analysis.ipynb)
 9. [Final Report](Project_Report.pdf)
 
 
