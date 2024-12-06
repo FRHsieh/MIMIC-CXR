@@ -96,15 +96,58 @@ We utilized the MIMIC-CXR dataset, focusing on a curated subset of chest X-ray i
 
 ## Methodology
 
-### Preprocessing
+Our methodology comprises several key steps, including data preprocessing, model architecture selection and tuning, multimodal integration, and evaluation.
 
-The preprocessing pipeline involved:
+### 4.1 Dataset Description and Preprocessing
+
+We utilized the MIMIC-CXR dataset, focusing on a curated subset of chest X-ray images. The preprocessing pipeline involved:
 
 1. Merging metadata from multiple CSV files, including patient records, CheXpert labels, and metadata.
 2. Aligning images based on subject_id, study_id, and dicom_id.
-3. Filtering the dataset to include only posterior-anterior (PA) chest X-rays with labels as 1 (case) or 0 (control).
+3. Filtering the dataset to include only posterior-anterior (PA) chest X-rays with labels as 1 (case) or 0 (control), resulting in 4742 images.
 4. Selecting a single PA image per subject to maintain balance.
 5. Resizing images to 224×224 pixels and normalizing using a mean and standard deviation of 0.5.
+
+### 4.2 Model Architecture and Tuning
+
+We evaluated several pretrained CNN models, including VGG-16, ResNet, and DenseNet. These models were fine-tuned by modifying the final fully connected layer to produce a single output node for binary classification. The Adam optimizer was used during training, with adjustable learning rates and weight decay for improved regularization.
+
+Among the tested models, ResNet-18 demonstrated the best performance and was chosen for further tuning. Hyperparameters such as learning rate, weight decay, batch size, and dropout probability were evaluated using the validation set to select the best-performing model settings.
+
+### 4.3 Multimodal Integration with LLaMA
+
+LLaMA-3.2-11B-Vision-Instruct was fine-tuned to align text and visual features. The model's vision encoder processed X-ray images, while the text generator created coherent diagnostic narratives.
+
+### 4.4 CNN Training and Evaluation
+
+The dataset was split into training and validation sets. We implemented early stopping during training to mitigate overfitting. The training process included:
+
+1. Implementing a training loop with early stopping.
+2. Applying data augmentation techniques, including random horizontal flips and rotations, during training.
+3. Assessing model performance using metrics such as F1-score, ROC-AUC, and accuracy on the validation set.
+
+All computations were carried out using PyTorch, with GPU acceleration to streamline the training process.
+
+### 4.5 Training Process for LLaMA-3.2-11B-Vision-Instruct
+
+The training process for LLaMA-3.2-11B-Vision-Instruct involved several key strategies:
+
+- **Dataset Preparation**: 2562 samples for training and 285 for validation.
+- **Instruction-based Learning**: Using an expert radiographer instruction to guide the model.
+- **Conversation Format**: Converting training data into a conversation format.
+- **Model Configuration**: Using 4-bit quantization and gradient checkpointing.
+- **Training Techniques**: Implementing early stopping and data augmentation.
+- **Hyperparameters**: 
+  - Number of training epochs: 2
+  - Batch size: 8 per device
+  - Gradient accumulation steps: 4
+  - Learning rate: 1e-4
+  - Warmup steps: 5
+  - Maximum steps: 200
+- **Hardware Optimization**: Utilizing NVIDIA A100-SXM4-80GB GPUs with mixed precision training.
+- **Custom Data Collator**: Using a specialized UnslothVisionDataCollator for handling multimodal data.
+
+This comprehensive methodology ensured that both the CNN models and LLaMA-3.2-11B-Vision-Instruct were optimally prepared for the challenging task of chest X-ray interpretation and report generation.
 
 ### Model Architecture
 
@@ -131,14 +174,14 @@ Our model demonstrated varying performance across different chest abnormalities:
 | Cardiomegaly     | 0.2727   | 0.1111   | 0.6000 |
 | Consolidation    | 0.7317   | 0.2667   | 0.7270 |
 
-![image](CNN.png)
+![image](CNN/CNN.png)
 The results show that our model performs well in detecting common abnormalities like pleural effusion and atelectasis, with high accuracy and F1 scores. However, performance on rarer conditions like cardiomegaly was less robust.
 
 ## Discussion
 
 ### Strengths
 1. **LLaMA's Integration for Enhanced Reporting**: The use of LLaMA-3.2-11B-Vision-Instruct significantly enhanced the quality and coherence of diagnostic report generation.
-2. **ResNet50's Superior Performance**: Among the evaluated architectures, ResNet50 emerged as the most accurate model for complex pathologies.
+2. **ResNet18's Superior Performance**: Among the evaluated architectures, ResNet18 emerged as the most accurate model for complex pathologies.
 
 ### Challenges
 1. **Difficulty in Handling Rare Abnormalities**: Cardiomegaly and similar underrepresented conditions pose a challenge due to dataset imbalance.
