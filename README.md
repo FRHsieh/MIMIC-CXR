@@ -46,9 +46,11 @@ The main objectives of this project are:
 1. [Prepocessing Methods](Prepocessing.ipynb)
 2. [CNN Model Tuning](/CNN/CNN_tuning.ipynb)
 3. [CNN Model Training Testing and Validation](/CNN/CNN_train_test.ipynb)
-4. [Model Evaluation](/CNN/CNN.png)
-5. 
-6. [Final Report](Project_Report.pdf)
+4. [CNN Model Evaluation](/CNN/CNN.png)
+5. [LLama Setting Up](/Text_Generation/Llama_Setting_Up.ipynb)
+6. [LLama Training](/Text_Generation/Loading_and_Training.ipynb)
+7. [LLama Training](/Text_Generation/Results_analysis.ipynb)
+9. [Final Report](Project_Report.pdf)
 
 
 ## Introduction
