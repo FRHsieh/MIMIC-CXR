@@ -69,7 +69,7 @@ By combining these advanced CNN architectures with the multimodal capabilities o
 
 ## File Directory
 
-1. [Prepocessing Methods](Prepocessing.ipynb)
+1. [Preprocessing Methods](Preprocessing.ipynb)
 2. [CNN Model Tuning](/CNN/CNN_tuning.ipynb)
 3. [CNN Model Training Testing and Validation](/CNN/CNN_train_test.ipynb)
 4. [CNN Model Evaluation](/CNN/CNN.png)
