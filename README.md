@@ -175,6 +175,7 @@ Our model demonstrated varying performance across different chest abnormalities:
 | Consolidation    | 0.7317   | 0.2667   | 0.7270 |
 
 ![image](CNN/CNN.png)
+![image](Text_Generation/Text_Generation_Matrix.png)
 The results show that our model performs well in detecting common abnormalities like pleural effusion and atelectasis, with high accuracy and F1 scores. However, performance on rarer conditions like cardiomegaly was less robust.
 
 ## Discussion
