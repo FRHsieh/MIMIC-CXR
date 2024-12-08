@@ -1,5 +1,5 @@
 # MIMIC-CXR: Chest X-ray Image Classification and Report Generation
-## Alexander Koehler, Feng-Jen Hsieh, Yuandi Tang
+## Team 16 Alexander Koehler, Feng-Jen Hsieh, Yuandi Tang
 
 ## Overview
 
