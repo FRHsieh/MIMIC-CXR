@@ -27,7 +27,6 @@ The project utilizes a combination of advanced CNN architectures and multimodal 
 
 - Evaluated several pretrained CNN models, including VGG-16, ResNet, and DenseNet.
 - ResNet-18 demonstrated the best performance and was chosen for further tuning.
-- ResNet50 emerged as the most accurate model for complex pathologies.
 
 ### 2. LLaMA-3.2-11B-Vision-Instruct for Text Generation and Multimodal Alignment
 
@@ -176,7 +175,7 @@ Our model demonstrated varying performance across different chest abnormalities:
 
 ![image](CNN/CNN.png)
 ![image](Text_Generation/Text_Generation_Matrix.png)
-The results show that our model performs well in detecting common abnormalities like pleural effusion and atelectasis, with high accuracy and F1 scores. However, performance on rarer conditions like cardiomegaly was less robust.
+The results show that our model performs well in detecting common abnormalities like pleural effusion and atelectasis, with high accuracy and F1 scores.
 
 ## Discussion
 
