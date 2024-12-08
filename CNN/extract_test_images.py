@@ -9,12 +9,12 @@ import shutil
 import os
 
 # joint dataframes
-df2 = pd.read_csv('cxr-record-list.csv')
-df4 = pd.read_csv('mimic-cxr-2.0.0-chexpert.csv')
-df6 = pd.read_csv('mimic-cxr-2.0.0-metadata.csv')
+df1 = pd.read_csv('cxr-record-list.csv')
+df2 = pd.read_csv('mimic-cxr-2.0.0-chexpert.csv')
+df3 = pd.read_csv('mimic-cxr-2.0.0-metadata.csv')
 
-merge_df = df2.merge(df4,on=['subject_id','study_id'],how='inner')
-merge_df = merge_df.merge(df6[['dicom_id', 'ViewPosition']],on='dicom_id',how='inner')
+merge_df = df1.merge(df2,on=['subject_id','study_id'],how='inner')
+merge_df = merge_df.merge(df3[['dicom_id', 'ViewPosition']],on='dicom_id',how='inner')
 merge_df['jpg_id'] = merge_df['dicom_id'] + '.jpg'
 
 test_images = os.listdir('Image_Testing') #all test images downloaded
