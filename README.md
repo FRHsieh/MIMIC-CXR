@@ -7,7 +7,7 @@ This repository contains the implementation and results of the research paper **
 
 **See our paper [here](https://www.overleaf.com/read/ndtcsshrwzzd#1ced8a)**
 
-**See our demo [here](https://www.overleaf.com/read/ndtcsshrwzzd#1ced8a)**
+**See our demo [here](https://www.canva.com/design/DAGXdXy0xKU/BVLZYe-p23RkPfG2Qx_YaQ/view?utm_content=DAGXdXy0xKU&utm_campaign=designshare&utm_medium=link&utm_source=editor)**
 
 ## Main Objectives
 
